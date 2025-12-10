@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta-name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 1</title>
+    <link rel="stylesheet" href="project1.css">
+</head>
+<body>
+
+<header class="site-header">
+    <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="project.html">Project</a>
+        <a href="contact.html" class="active">Contact</a>
+    </nav>
+
+    <button id="modeToggle" class="mode-btn">☀</button>
+</header>
+
+<div class="page-wrapper">
+
+    <div class="left-box" contenteditable="true" id="codeBox">
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_BOOKS 100
+
+struct Book {
+    int id;
+    char title[50];
+    char author[50];
+    int available;
+};
+
+int main() {
+    struct Book library[MAX_BOOKS];
+    int count = 0;
+    int choice;
+
+    while (1) {
+        printf("\n===== Simple Library System =====\n");
+        printf("1. Add Book\n2. View Books\n3. Search Book by ID\n4. Borrow Book\n5. Exit\n");
+        printf("Enter your choice: ");
+
+        if (scanf("%d", &choice) != 1) {
+            printf("Invalid input! Please enter a number.\n");
+            while (getchar() != '\n'); 
+            continue;
+        }
+
+        if (choice == 1) {
+            printf("\nEnter Book ID: ");
+            scanf("%d", &library[count].id);
+            printf("Enter Book Title: ");
+            scanf(" %[^\n]", library[count].title);
+            printf("Enter Author Name: ");
+            scanf(" %[^\n]", library[count].author);
+            library[count].available = 1;
+            count++;
+            printf("Book added successfully!\n");
+
+        } else if (choice == 2) {
+            if (count == 0) {
+                printf("No books available!\n");
+            } else {
+                for (int i = 0; i < count; i++) {
+                    printf("ID: %d | Title: %s | Author: %s | Status: %s\n",
+                        library[i].id, library[i].title, library[i].author,
+                        library[i].available ? "Available" : "Borrowed");
+                }
+            }
+
+        } else if (choice == 5) {
+            printf("Exiting... Goodbye!\n");
+            break;
+
+        } else {
+            printf("Invalid choice. Please try again.\n");
+        }
+    }
+
+    return 0;
+}
+
+    </div>
+
+    <button class="run-btn" id="runBtn">Run</button>
+
+    <div class="right-box" id="outputBox">
+        Output will appear here...
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
